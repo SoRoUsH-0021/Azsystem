@@ -11,3 +11,12 @@ log() {
 }
 
 
+
+[[ "$1" == "--dry-run" ]] && IS_DRY_RUN=true && log "Dry-run mode enabled"
+
+
+if [[ ! -f "$CONFIG_FILE" ]]; then
+  log "Config file not found: $CONFIG_FILE"
+  exit 1
+fi
+
