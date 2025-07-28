@@ -69,3 +69,9 @@ while read -r line; do
   fi
 done < "$CONFIG_FILE"
 
+log "Cleaning backups older than $KEEP_DAYS days"
+if ! $IS_DRY_RUN; then
+  find "$BACKUP_DIR" -type f -name "*.tar.gz" -mtime +$KEEP_DAYS -exec rm -f {} \;
+fi
+
+log "Backup job completed"
