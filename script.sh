@@ -20,3 +20,16 @@ if [[ ! -f "$CONFIG_FILE" ]]; then
   exit 1
 fi
 
+
+mkdir -p "$BACKUP_DIR"
+
+
+backup_path() {
+  local path="$1"
+  local ext="$2"
+  local base=$(basename "$path")
+  local timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
+  local archive_name="${base}_${timestamp}.tar.gz"
+  local dest="$BACKUP_DIR/$archive_name"
+
+
