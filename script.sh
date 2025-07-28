@@ -40,4 +40,12 @@ backup_path() {
     files=$(find "$path" -type f -name "*.${ext}")
   fi
 
+  if [[ -z "$files" ]]; then
+    log "No files found in $path with extension .$ext"
+    return
+  fi
+
+  if $IS_DRY_RUN; then
+    log "[Dry-run] Would archive files from $path to $dest"
+  else
 
