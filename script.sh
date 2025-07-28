@@ -53,7 +53,7 @@ backup_path() {
       log "Backup created: $dest"
     else
       log "Backup failed for $path"
-      echo "Backup failed for $path" | mail -s "Backup Error" user@example.com
+      echo "Backup failed for $path" | mail -s "Backup Error" soroush.sahraeii@gmail.com
     fi
   fi
 }
