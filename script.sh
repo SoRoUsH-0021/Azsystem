@@ -58,3 +58,14 @@ backup_path() {
   fi
 }
 
+while read -r line; do
+  [[ -z "$line" || "$line" =~ ^# ]] && continue
+  path=$(echo "$line" | awk '{print $1}')
+  ext=$(echo "$line" | awk '{print $2}')
+  if [[ -d "$path" ]]; then
+    backup_path "$path" "$ext"
+  else
+    log "Skipped: directory not found: $path"
+  fi
+done < "$CONFIG_FILE"
+
