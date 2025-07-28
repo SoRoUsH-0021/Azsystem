@@ -32,4 +32,12 @@ backup_path() {
   local archive_name="${base}_${timestamp}.tar.gz"
   local dest="$BACKUP_DIR/$archive_name"
 
+  log "Processing $path for extension .$ext"
+
+  if [[ "$ext" == "*" ]]; then
+    files=$(find "$path" -type f)
+  else
+    files=$(find "$path" -type f -name "*.${ext}")
+  fi
+
 
