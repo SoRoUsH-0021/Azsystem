@@ -48,4 +48,13 @@ backup_path() {
   if $IS_DRY_RUN; then
     log "[Dry-run] Would archive files from $path to $dest"
   else
+    tar -czf "$dest" $files 2>>"$LOG_FILE"
+    if [[ $? -eq 0 ]]; then
+      log "Backup created: $dest"
+    else
+      log "Backup failed for $path"
+      echo "Backup failed for $path" | mail -s "Backup Error" user@example.com
+    fi
+  fi
+}
 
